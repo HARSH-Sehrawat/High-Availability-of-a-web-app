@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>    
+    <title>Document</title>
+    <style>
+      div {
+        margin-bottom: 10px;
+      }
+      label {
+        display: inline-block;
+        width: 150px;
+      }
+      table {
+ 	 border-collapse: collapse;
+  	 width: 100%;
+      }
+      th, td {
+     	padding: 8px;
+  	text-align: left;
+  	border-bottom: 1px solid #ddd;
+     }
+    </style>
+</head>
+<body>
+<div class="container">
+  <h2>Oncall Roster</h2>
+   <h3>Server 1</h3>
+    <div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Create</a>
+        </h4>
+      </div>
+      <div id="collapse1" class="panel-collapse collapse">
+     <div class="panel-body"> 
+     <form method="post" action="" onsubmit="myFunction()">
+        <label for="empId">Employee Id</label>
+        <input type="number" id="empId"><br><br>
+        <label for="empName">Employee Name</label>
+        <input type="text" id="empName"><br><br>
+        <label for="teamName">Team Name</label>
+        <input type="text" id="teamName"><br><br>
+        <label for="callStartDate">Call Start Date</label>
+        <input type="text" id="callStartDate"><br><br>
+        <label for="callEndDate">Call End Date</label>
+        <input type="text" id="callEndDate"><br><br>
+        <label for="contInfo">Contact Info</label>
+        <input type="text" id="contInfo"><br><br>
+        <label for="scdryEmp">Secondary Employee</label>
+        <input type="text" id="scdryEmp"><br><bR>
+        <label for="scdryEmpCont">Secondary Employee Contact Info</label>
+        <input type="text" id="scdryEmpCont"><br>
+        <input type="submit" value="submit" onclick="createTask()">
+    </form>
+    </div>
+</div>
+<div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Get</a>
+        </h4>
+      </div>
+      <div id="collapse2" class="panel-collapse collapse">
+        <div class="panel-body">
+    <form method="get" action="">
+        <label for="empId2">Employee Id</label>
+        <input type="number" id="empId2"><br>
+        <button type="button" onclick="getTask()">Get</button>
+    </form>
+	<table hidden id="table">
+        <tr>
+            <th>Employee Id</th>
+            <th>Employee Name</th>
+	    <th>Team Name</th>
+	    <th>Call Start Date</th>
+	    <th>call End Date</th>
+	    <th>Contact Info</th>
+	    <th>Secondary Employee</th>
+	    <th>Secondary Employee Contact Info</th>
+        </tr>
+        <tr>
+            <td id="empid"></td>
+            <td id="name"></td>
+	    <td id="tname"></td>
+	    <td id="callstart"></td>
+	    <td id="callend"></td>
+	    <td id="continfo"></td>
+	    <td id="scdemp"></td>
+	    <td id="scdempInfo"></td>
+        </tr>
+    </table></div>
+</div>
+<div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Update</a>
+        </h4>
+      </div>
+      <div id="collapse3" class="panel-collapse collapse">
+        <div class="panel-body">
+    <form method="put" action="">
+        <label for="empId3">Employee Id</label>
+        <input type="const" id="empId3"><br><br>
+        <label for="empName2">Employee Name</label>
+        <input type="text" id="empName2"><br><br>
+        <label for="teamName2">Team Name</label>
+        <input type="text" id="teamName2"><br><br>
+        <label for="callStartDate2">Call Start Date</label>
+        <input type="text" id="callStartDate2"><br><br>
+        <label for="callEndDate2">Call End Date</label>
+        <input type="text" id="callEndDate2"><br><br>
+        <label for="contInfo2">Contact Info</label>
+        <input type="text" id="contInfo2"><br><br>
+        <label for="scdryEmp2">Secondary Employee</label>
+        <input type="text" id="scdryEmp2"><br><bR>
+        <label for="scdryEmpCont2">Secondary Employee Contact Info</label>
+        <input type="text" id="scdryEmpCont2"><br>
+        <button type="button" onclick="updateTask()">Upadate</button>
+    </form></div>
+</div>
+<div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">Delete</a>
+        </h4>
+      </div>
+      <div id="collapse4" class="panel-collapse collapse">
+        <div class="panel-body">
+    <form method="delete" action="">
+        <label for="empId4">Employee Id</label>
+        <input type="number" id="empId4"><br>
+        <button type="button" onclick="deleteTask()">Delete</button>
+    </form></div>
+   </div>
+ </div>
+</div>
+    <script>
+	  async function myFunction() {
+  		alert("Employee added successfully");
+	}
+
+	  async function createTask(){
+            var empId=document.getElementById("empId").value;
+            var empName=document.getElementById("empName").value;
+            var teamName=document.getElementById("teamName").value;
+            var callStartDate=document.getElementById("callStartDate").value;
+            var callEndDate=document.getElementById("callEndDate").value;
+            var contInfo=document.getElementById("contInfo").value;
+            var scdryEmp=document.getElementById("scdryEmp").value;
+            var scdryEmpCont=document.getElementById("scdryEmpCont").value;
+            var jsonData="{\"empid\":"+empId+",\"empName\":\""+empName+"\",\"teamName\":\""+teamName+"\",\"callStartDate\":\""+callStartDate+"\",\"callEndDate\":\""+callEndDate+"\",\"contInfo\":\""+contInfo+"\",\"scdryEmp\":\""+scdryEmp+"\",\"scdryEmpCont\":\""+scdryEmpCont+"\"}";
+            const response = await fetch('/tasks', {
+                method: "POST",
+                headers: {
+                    'Content-Type' : 'application/json'
+                },
+                body: jsonData
+            })
+            if (response){
+                console.log("it worked")
+            }
+            alert(jsonData);
+        }
+	  async function getTask(){
+            var res;
+            var empId=document.getElementById("empId2").value;
+            var response= await fetch(`/tasks/${empId}`,{
+                method :"GET"
+            });
+	    var data = await response.json();
+	    console.log(JSON.stringify(data));
+            displayTable(JSON.stringify(data));
+        }
+	async function updateTask(){
+            var empId=document.getElementById("empId3").value;
+            var empName=document.getElementById("empName2").value;
+            var teamName=document.getElementById("teamName2").value;
+            var callStartDate=document.getElementById("callStartDate2").value;
+            var callEndDate=document.getElementById("callEndDate2").value;
+            var contInfo=document.getElementById("contInfo2").value;
+            var scdryEmp=document.getElementById("scdryEmp2").value;
+            var scdryEmpCont=document.getElementById("scdryEmpCont2").value;
+            var jsonData="{\"empid\":"+empId+",\"empName\":\""+empName+"\",\"teamName\":\""+teamName+"\",\"callStartDate\":\""+callStartDate+"\",\"callEndDate\":\""+callEndDate+"\",\"contInfo\":\""+contInfo+"\",\"scdryEmp\":\""+scdryEmp+"\",\"scdryEmpCont\":\""+scdryEmpCont+"\"}";
+            const response = await fetch(`/updateTask/${empId}`, {
+                method: "PUT",
+                headers: {
+                    'Content-Type' : 'application/json'
+                },
+                body: jsonData
+            })
+            if (response){
+                console.log("it worked")
+            }
+            alert("Updated Successfully");
+        }
+	async function deleteTask(){
+            var res;
+            var empId=document.getElementById("empId4").value;
+            var response= await fetch(`/deleteTask/${empId}`,{
+                method :"DELETE"
+            });
+            if(response.status==200){
+                alert("Delete Successfully");
+            }
+
+        }
+	 function displayTable(data){
+	    jsondata=JSON.parse(data);
+	    console.log(jsondata["contInfo"])
+	    document.getElementById("table").style.display="block";
+            document.getElementById("empid").innerHTML=jsondata["empid"];
+            document.getElementById("name").innerHTML=jsondata["empName"];
+	    document.getElementById("tname").innerHTML=jsondata["teamName"];
+	    document.getElementById("callstart").innerHTML=jsondata["callStartDate"];
+	    document.getElementById("callend").innerHTML=jsondata["callEndDate"];
+	    document.getElementById("continfo").innerHTML=jsondata["contInfo"];
+	    document.getElementById("scdemp").innerHTML=jsondata["scdryEmp"];
+	    document.getElementById("scdempInfo").innerHTML=jsondata["scdryEmpCont"];
+        }
+    </script>
+</body>
+</html>
+
+
